@@ -1,0 +1,37 @@
+name: Bug report
+description: Report behavior that does not match the documentation.
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: Describe the problem. Include what you expected instead.
+      placeholder: The editor did not load the plugin.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the steps that trigger the problem.
+      placeholder: |
+        1. Open UISceneAuthor.uproject in Unreal Engine 5.6.
+        2. Accept the module build prompt.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include the engine version, the operating system, and the plugin version.
+      placeholder: Unreal Engine 5.6.0, Windows 11, plugin 0.1.0.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste the relevant lines from the editor log in Saved/Logs, if you have them.
+    validations:
+      required: false

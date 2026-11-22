@@ -1,0 +1,54 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3"
+      - name: Check the uplugin and uproject parse as JSON
+        run: |
+          python - <<'EOF'
+          import json
+
+          paths = [
+              "Plugins/UISceneAuthor/UISceneAuthor.uplugin",
+              "UISceneAuthor.uproject",
+          ]
+          for path in paths:
+              with open(path, encoding="utf-8") as file:
+                  json.load(file)
+              print(path + " parses as JSON")
+          EOF
+      - name: Check required files exist
+        run: |
+          python - <<'EOF'
+          from pathlib import Path
+
+          paths = [
+              "Plugins/UISceneAuthor/Source/UISceneAuthor/UISceneAuthor.Build.cs",
+              "Plugins/UISceneAuthor/Source/UISceneAuthor/Public/UISceneAuthor.h",
+              "Plugins/UISceneAuthor/Source/UISceneAuthor/Private/UISceneAuthor.cpp",
+              "Plugins/UISceneAuthor/Source/UISceneAuthorEditor/UISceneAuthorEditor.Build.cs",
+              "Plugins/UISceneAuthor/Source/UISceneAuthorEditor/Public/UISceneAuthorEditor.h",
+              "Plugins/UISceneAuthor/Source/UISceneAuthorEditor/Private/UISceneAuthorEditor.cpp",
+              "Source/UISceneAuthorHost.Target.cs",
+              "Source/UISceneAuthorHostEditor.Target.cs",
+              "Source/UISceneAuthorHost/UISceneAuthorHost.Build.cs",
+              "Source/UISceneAuthorHost/UISceneAuthorHost.h",
+              "Source/UISceneAuthorHost/UISceneAuthorHost.cpp",
+              "LICENSE",
+              "README.md",
+          ]
+          missing = [path for path in paths if not Path(path).is_file() or Path(path).stat().st_size == 0]
+          if missing:
+              raise SystemExit("Missing or empty: " + ", ".join(missing))
+          print("All required files exist")
+          EOF

@@ -1,0 +1,34 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "EngineVersion": "5.6",
+  "FriendlyName": "UI Scene Author",
+  "Description": "Author named UMG data scenes and run layout checks. Foundation only in 0.1.0.",
+  "Category": "Editor",
+  "CreatedBy": "Lex",
+  "CreatedByURL": "https://github.com/AAAiee",
+  "DocsURL": "https://github.com/AAAiee/UISceneAuthor",
+  "SupportURL": "https://github.com/AAAiee/UISceneAuthor/issues",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "Installed": false,
+  "EnabledByDefault": false,
+  "Modules": [
+    {
+      "Name": "UISceneAuthor",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "UISceneAuthorEditor",
+      "Type": "Editor",
+      "LoadingPhase": "Default",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Linux",
+        "Mac"
+      ]
+    }
+  ]
+}
